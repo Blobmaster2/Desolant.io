@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05d5c4cc6ff46ac45b930fcf186846d2, type: 3}
+  m_Name: Example
+  m_EditorClassIdentifier: 
+  physicalDamageModifier: 1
+  lightDamageModifier: 1
+  heavyDamageModifier: 1
+  cartridgeDamageModifier: 1
+  plasmaDamageModifier: 1
+  explosiveDamageModifier: 1
+  RadiationModifier: 1
+  RadiationReductionModifier: 1
+  temperatureModifier: 1
+  suffocationModifier: 1

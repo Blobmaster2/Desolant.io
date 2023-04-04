@@ -4,15 +4,37 @@ using UnityEngine;
 
 public class BuildingObject : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public AudioClip sound;
+    public Sprite texture;
+
+    public int durability;
+
+    public bool isUnbreakable;
+    public bool isPlaceableOn;
+    public bool isInteractable;
+
+    public bool isMultiBlock;
+    public List<Sprite> multiTextures;
+
+    public List<Item> dropItems;
+
+    public virtual void BreakObject()
     {
-        
+
     }
 
-    // Update is called once per frame
-    void Update()
+    public virtual void DropItem()
     {
-        
+
+    }
+
+    public virtual void Interact()
+    {
+
+    }
+
+    public virtual void SpawnItems()
+    {
+
     }
 }

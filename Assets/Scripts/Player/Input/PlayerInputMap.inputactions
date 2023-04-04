@@ -24,7 +24,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Hit",
+                    "name": "HitPlace",
                     "type": "Button",
                     "id": "95395cda-7379-49b7-ac16-8f08c716a6ba",
                     "expectedControlType": "Button",
@@ -76,6 +76,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Rotate",
+                    "type": "Button",
+                    "id": "e4f5b8f4-6bd6-471b-bf70-b3cfeb5954c6",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ChangeAnchor",
+                    "type": "Value",
+                    "id": "e132b4c3-7435-4276-905a-57815196aa8e",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -152,7 +170,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
-                    "action": "Hit",
+                    "action": "HitPlace",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -208,6 +226,28 @@
                     "processors": "",
                     "groups": "Keyboard",
                     "action": "Craft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4d784c2a-6826-4e67-aa2b-410b05543baf",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Rotate",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5d5da9a3-d2dc-4daf-8a8f-78de55c97053",
+                    "path": "<Mouse>/scroll",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ChangeAnchor",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

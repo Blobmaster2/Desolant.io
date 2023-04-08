@@ -8,25 +8,26 @@ using UnityEngine.InputSystem;
 public class PlayerControls : NetworkBehaviour
 {
     PlayerInput playerInput;
-    Rigidbody2D rb;
-
-    public bool isBuilding;
+    public Rigidbody2D rb;
 
     public float walkSpeed;
     public float runSpeed;
     float moveSpeed;
 
-    Vector2 scrollValue;
+    public List<PlayerState> playerStates = new List<PlayerState>();
 
-    void Awake()
+    public class PlayerState
     {
-        moveSpeed = walkSpeed;
-        rb = GetComponent<Rigidbody2D>();
-        playerInput = GetComponent<PlayerInput>();
+        public Vector2 position;
+        public Vector2 velocity;
+        public Vector2 input;
+        public float timestamp;
     }
 
-    private void OnEnable()
+    private void Start()
     {
+        moveSpeed = walkSpeed;
+        playerInput = GetComponent<PlayerInput>();
         InitPlayerActions();
     }
 
@@ -42,26 +43,83 @@ public class PlayerControls : NetworkBehaviour
         playerInput.actions["ChangeAnchor"].started += ChangeAnchor;
     }
 
-    private void Update()
-    {
-        if (IsOwner) Move();
-    }
-
-    void Move()
+    private void FixedUpdate()
     {
         Vector2 moveDir = playerInput.actions["Move"].ReadValue<Vector2>();
+        float timestamp = Time.time;
 
-        rb.velocity = moveDir * moveSpeed;
+        if (IsServer && IsLocalPlayer)
+        {
+            Move(moveDir);
+        }
+        else if (IsClient && IsLocalPlayer)
+        {
+            // Predict client movement
+            Vector2 predictedPosition = rb.position + rb.velocity * Time.fixedDeltaTime;
+            Vector2 predictedVelocity = (predictedPosition - rb.position) / Time.fixedDeltaTime;
+
+            // Add predicted state to list
+            playerStates.Add(new PlayerState
+            {
+                position = predictedPosition,
+                velocity = predictedVelocity,
+                input = moveDir,
+                timestamp = timestamp
+            });
+
+            // Remove old player states
+            while (playerStates.Count > 10)
+            {
+                playerStates.RemoveAt(0);
+            }
+
+            // Send input to server
+            MoveServerRpc(moveDir, timestamp);
+        }
+    }
+
+
+    void Move(Vector2 moveDir)
+    {
+        Vector2 velocity = moveDir * moveSpeed;
+        Vector2 position = rb.position + velocity * Time.fixedDeltaTime;
+
+        rb.MovePosition(position);
+        rb.velocity = velocity;
+
+        // Add new player state to list
+        playerStates.Add(new PlayerState
+        {
+            position = position,
+            velocity = velocity,
+            input = moveDir,
+            timestamp = Time.time
+        });
+
+        // Remove old player states
+        while (playerStates.Count > 10)
+        {
+            playerStates.RemoveAt(0);
+        }
+    }
+
+
+    [ServerRpc]
+    void MoveServerRpc(Vector2 moveDir, float timestamp)
+    {
+        PlayerState state = playerStates.FindLast(s => s.timestamp <= timestamp);
+
+        if (state != null)
+        {
+            rb.MovePosition(state.position);
+            rb.velocity = state.velocity;
+        }
+
+        Move(moveDir);
     }
 
     void Hit()
     {
-        if (isBuilding)
-        {
-            Build();
-            return;
-        }
-
 
     }
 
@@ -72,7 +130,6 @@ public class PlayerControls : NetworkBehaviour
 
     void Rotate()
     {
-        if (!isBuilding) return;
 
 
     }
@@ -104,8 +161,6 @@ public class PlayerControls : NetworkBehaviour
 
     private void ChangeAnchor(InputAction.CallbackContext ctx)
     {
-        scrollValue = ctx.ReadValue<Vector2>();
-
-
+        
     }
 }

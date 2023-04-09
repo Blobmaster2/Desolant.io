@@ -9,10 +9,15 @@ public class PlayerControls : NetworkBehaviour
 {
     public PlayerInput playerInput;
     public Rigidbody2D rb;
+    public Collider2D hitCollider;
+
+    public float hitCooldown;
 
     public float walkSpeed;
     public float runSpeed;
     float moveSpeed;
+
+    NetworkVariable<bool> isHitting = new NetworkVariable<bool>(false);
 
     public Camera renderCam;
 
@@ -37,6 +42,23 @@ public class PlayerControls : NetworkBehaviour
         playerInput.actions["Interact"].started += ctx => Interact();
         playerInput.actions["Reload"].started += ctx => Reload();
         playerInput.actions["ChangeAnchor"].started += ChangeAnchor;
+    }
+
+    private void OnDisable()
+    {
+        DeInitPlayerActions();
+    }
+
+    void DeInitPlayerActions()
+    {
+        playerInput.actions["HitPlace"].started -= ctx => Hit();
+        playerInput.actions["Rotate"].started -= ctx => Rotate();
+        playerInput.actions["Craft"].started -= ctx => OpenCraft();
+        playerInput.actions["Inventory"].started -= ctx => OpenInventory();
+        playerInput.actions["Map"].started -= ctx => OpenMap();
+        playerInput.actions["Interact"].started -= ctx => Interact();
+        playerInput.actions["Reload"].started -= ctx => Reload();
+        playerInput.actions["ChangeAnchor"].started -= ChangeAnchor;
     }
 
     private void FixedUpdate()
@@ -90,7 +112,39 @@ public class PlayerControls : NetworkBehaviour
 
     void Hit()
     {
+        if (IsClient && IsLocalPlayer)
+        {
+            isHitting.Value = true;
+            //if (!isHitting.Value)
+            //{
+            //    WaitForHitServerRpc();
+            //    StartCoroutine(WaitForHit());
+            //}
+        }
+    }
 
+    [ServerRpc]
+    void WaitForHitServerRpc()
+    {
+        StartCoroutine(WaitForHit());
+    }
+
+    IEnumerator WaitForHit()
+    {
+        isHitting.Value = true;
+
+        yield return new WaitForSeconds(hitCooldown / 2);
+
+        hitCollider.enabled = true;
+        Debug.Log("Hit");
+
+        yield return new WaitForSeconds(0.2f);
+
+        hitCollider.enabled = false;
+
+        yield return new WaitForSeconds(hitCooldown / 2);
+
+        isHitting.Value = false;
     }
 
     void Build()

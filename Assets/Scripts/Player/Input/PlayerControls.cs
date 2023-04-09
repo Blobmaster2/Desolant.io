@@ -7,28 +7,24 @@ using UnityEngine.InputSystem;
 
 public class PlayerControls : NetworkBehaviour
 {
-    PlayerInput playerInput;
+    public PlayerInput playerInput;
     public Rigidbody2D rb;
 
     public float walkSpeed;
     public float runSpeed;
     float moveSpeed;
 
-    public List<PlayerState> playerStates = new List<PlayerState>();
-
-    public class PlayerState
-    {
-        public Vector2 position;
-        public Vector2 velocity;
-        public Vector2 input;
-        public float timestamp;
-    }
+    public Camera renderCam;
 
     private void Start()
     {
         moveSpeed = walkSpeed;
-        playerInput = GetComponent<PlayerInput>();
         InitPlayerActions();
+
+        if (IsLocalPlayer)
+        {
+            renderCam.enabled = true;
+        }
     }
 
     void InitPlayerActions()
@@ -46,76 +42,50 @@ public class PlayerControls : NetworkBehaviour
     private void FixedUpdate()
     {
         Vector2 moveDir = playerInput.actions["Move"].ReadValue<Vector2>();
-        float timestamp = Time.time;
+        Vector2 mousePos = playerInput.actions["Mouse"].ReadValue<Vector2>();
 
         if (IsServer && IsLocalPlayer)
         {
             Move(moveDir);
+            Mouse(mousePos);
+            MouseClientRpc(mousePos);
         }
         else if (IsClient && IsLocalPlayer)
         {
-            // Predict client movement
-            Vector2 predictedPosition = rb.position + rb.velocity * Time.fixedDeltaTime;
-            Vector2 predictedVelocity = (predictedPosition - rb.position) / Time.fixedDeltaTime;
-
-            // Add predicted state to list
-            playerStates.Add(new PlayerState
-            {
-                position = predictedPosition,
-                velocity = predictedVelocity,
-                input = moveDir,
-                timestamp = timestamp
-            });
-
-            // Remove old player states
-            while (playerStates.Count > 10)
-            {
-                playerStates.RemoveAt(0);
-            }
-
-            // Send input to server
-            MoveServerRpc(moveDir, timestamp);
+            Move(moveDir);
+            MoveServerRpc(moveDir, mousePos);
         }
     }
-
 
     void Move(Vector2 moveDir)
     {
         Vector2 velocity = moveDir * moveSpeed;
-        Vector2 position = rb.position + velocity * Time.fixedDeltaTime;
 
-        rb.MovePosition(position);
         rb.velocity = velocity;
-
-        // Add new player state to list
-        playerStates.Add(new PlayerState
-        {
-            position = position,
-            velocity = velocity,
-            input = moveDir,
-            timestamp = Time.time
-        });
-
-        // Remove old player states
-        while (playerStates.Count > 10)
-        {
-            playerStates.RemoveAt(0);
-        }
     }
 
+    [ClientRpc]
+    void MouseClientRpc(Vector2 mousePos)
+    {
+        Mouse(mousePos);
+    }
+
+    void Mouse(Vector2 mousePos)
+    {
+        var pos = renderCam.ScreenToViewportPoint(mousePos);
+
+        var angle = Mathf.Atan2(pos.y - 0.5f, pos.x - 0.5f) * Mathf.Rad2Deg;
+
+        transform.rotation = Quaternion.Euler(0, 0, angle - 90);
+    }
 
     [ServerRpc]
-    void MoveServerRpc(Vector2 moveDir, float timestamp)
+    void MoveServerRpc(Vector2 moveDir, Vector2 mousePos)
     {
-        PlayerState state = playerStates.FindLast(s => s.timestamp <= timestamp);
-
-        if (state != null)
-        {
-            rb.MovePosition(state.position);
-            rb.velocity = state.velocity;
-        }
-
         Move(moveDir);
+
+        Mouse(mousePos);
+        MouseClientRpc(mousePos);
     }
 
     void Hit()

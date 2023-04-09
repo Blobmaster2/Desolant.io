@@ -29,7 +29,7 @@ public partial class @PlayerInputMap: IInputActionCollection2, IDisposable
             ""actions"": [
                 {
                     ""name"": ""Move"",
-                    ""type"": ""Value"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""d1d0f44d-bf46-4653-8f43-be36a9ce9478"",
                     ""expectedControlType"": ""Dpad"",
                     ""processors"": """",
@@ -38,7 +38,7 @@ public partial class @PlayerInputMap: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""Mouse"",
-                    ""type"": ""Value"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""6fb31ec6-3c41-49ab-b8dc-7d766698b4c5"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",

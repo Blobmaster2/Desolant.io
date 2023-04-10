@@ -1,3 +1,4 @@
+using Networking.Movement;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ public class PlayerControls : NetworkBehaviour
     public PlayerInput playerInput;
     public Rigidbody2D rb;
     public Collider2D hitCollider;
+    public NetworkMovement networkMovement;
 
     public float hitCooldown;
 
@@ -17,9 +19,12 @@ public class PlayerControls : NetworkBehaviour
     public float runSpeed;
     float moveSpeed;
 
-    NetworkVariable<bool> isHitting = new NetworkVariable<bool>(false);
+    bool isHitting;
 
     public Camera renderCam;
+
+    Vector2 moveInput;
+    Vector2 mouseInput;
 
     private void Start()
     {
@@ -30,18 +35,24 @@ public class PlayerControls : NetworkBehaviour
         {
             renderCam.enabled = true;
         }
+        else
+        {
+            rb.mass = 100000;
+        }
     }
 
     void InitPlayerActions()
     {
-        playerInput.actions["HitPlace"].started += ctx => Hit();
-        playerInput.actions["Rotate"].started += ctx => Rotate();
-        playerInput.actions["Craft"].started += ctx => OpenCraft();
-        playerInput.actions["Inventory"].started += ctx => OpenInventory();
-        playerInput.actions["Map"].started += ctx => OpenMap();
-        playerInput.actions["Interact"].started += ctx => Interact();
-        playerInput.actions["Reload"].started += ctx => Reload();
-        playerInput.actions["ChangeAnchor"].started += ChangeAnchor;
+        playerInput.actions["HitPlace"].performed += ctx => Hit();
+        playerInput.actions["Rotate"].performed += ctx => Rotate();
+        playerInput.actions["Craft"].performed += ctx => OpenCraft();
+        playerInput.actions["Inventory"].performed += ctx => OpenInventory();
+        playerInput.actions["Map"].performed += ctx => OpenMap();
+        playerInput.actions["Interact"].performed += ctx => Interact();
+        playerInput.actions["Reload"].performed += ctx => Reload();
+        playerInput.actions["ChangeAnchor"].performed += ChangeAnchor;
+        playerInput.actions["Sprint"].started += ctx => moveSpeed = runSpeed;
+        playerInput.actions["Sprint"].canceled += ctx => moveSpeed = walkSpeed;
     }
 
     private void OnDisable()
@@ -59,6 +70,8 @@ public class PlayerControls : NetworkBehaviour
         playerInput.actions["Interact"].started -= ctx => Interact();
         playerInput.actions["Reload"].started -= ctx => Reload();
         playerInput.actions["ChangeAnchor"].started -= ChangeAnchor;
+        playerInput.actions["Sprint"].started -= ctx => moveSpeed = runSpeed;
+        playerInput.actions["Sprint"].canceled -= ctx => moveSpeed = walkSpeed;
     }
 
     private void FixedUpdate()
@@ -66,30 +79,42 @@ public class PlayerControls : NetworkBehaviour
         Vector2 moveDir = playerInput.actions["Move"].ReadValue<Vector2>();
         Vector2 mousePos = playerInput.actions["Mouse"].ReadValue<Vector2>();
 
+        moveDir *= moveSpeed;
+
         if (IsServer && IsLocalPlayer)
         {
-            Move(moveDir);
-            Mouse(mousePos);
-            MouseClientRpc(mousePos);
+            //networkMovement.ProcessSimulatedPlayerMovement();
         }
         else if (IsClient && IsLocalPlayer)
         {
-            Move(moveDir);
-            MoveServerRpc(moveDir, mousePos);
+            if (moveInput != moveDir * moveSpeed)
+            {
+                networkMovement.ProcessLocalPlayerMovement(moveDir);
+                moveInput = moveDir * moveSpeed;
+            }
+
+        }
+        
+
+        if (IsServer && IsLocalPlayer)
+        {
+            Mouse(mousePos);
+        }
+        else if (IsClient && IsLocalPlayer)
+        {
+            if (mouseInput != mousePos)
+            {
+                MouseServerRpc(mousePos);
+                Mouse(mousePos);
+
+                mouseInput = mousePos;
+            }
         }
     }
 
     void Move(Vector2 moveDir)
     {
-        Vector2 velocity = moveDir * moveSpeed;
-
-        rb.velocity = velocity;
-    }
-
-    [ClientRpc]
-    void MouseClientRpc(Vector2 mousePos)
-    {
-        Mouse(mousePos);
+        
     }
 
     void Mouse(Vector2 mousePos)
@@ -97,29 +122,38 @@ public class PlayerControls : NetworkBehaviour
         var pos = renderCam.ScreenToViewportPoint(mousePos);
 
         var angle = Mathf.Atan2(pos.y - 0.5f, pos.x - 0.5f) * Mathf.Rad2Deg;
-
         transform.rotation = Quaternion.Euler(0, 0, angle - 90);
     }
 
     [ServerRpc]
-    void MoveServerRpc(Vector2 moveDir, Vector2 mousePos)
+    void MoveServerRpc(Vector2 moveDir)
     {
         Move(moveDir);
+    }
 
+    [ServerRpc]
+    void MouseServerRpc(Vector2 mousePos)
+    {
         Mouse(mousePos);
         MouseClientRpc(mousePos);
+    }
+
+    [ClientRpc]
+    void MouseClientRpc(Vector2 mousePos)
+    {
+        if (IsLocalPlayer) return;
+        Mouse(mousePos);
     }
 
     void Hit()
     {
         if (IsClient && IsLocalPlayer)
         {
-            isHitting.Value = true;
-            //if (!isHitting.Value)
-            //{
-            //    WaitForHitServerRpc();
-            //    StartCoroutine(WaitForHit());
-            //}
+            if (!isHitting)
+            {
+                WaitForHitServerRpc();
+                StartCoroutine(WaitForHit());
+            }
         }
     }
 
@@ -131,12 +165,11 @@ public class PlayerControls : NetworkBehaviour
 
     IEnumerator WaitForHit()
     {
-        isHitting.Value = true;
+        isHitting = true;
 
         yield return new WaitForSeconds(hitCooldown / 2);
 
         hitCollider.enabled = true;
-        Debug.Log("Hit");
 
         yield return new WaitForSeconds(0.2f);
 
@@ -144,7 +177,7 @@ public class PlayerControls : NetworkBehaviour
 
         yield return new WaitForSeconds(hitCooldown / 2);
 
-        isHitting.Value = false;
+        isHitting = false;
     }
 
     void Build()

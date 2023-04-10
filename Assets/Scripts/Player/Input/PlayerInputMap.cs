@@ -116,6 +116,15 @@ public partial class @PlayerInputMap: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Sprint"",
+                    ""type"": ""Button"",
+                    ""id"": ""258b7809-424d-4f92-9c98-1aac58a99af3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -272,6 +281,17 @@ public partial class @PlayerInputMap: IInputActionCollection2, IDisposable
                     ""action"": ""ChangeAnchor"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5997f115-4890-41b0-9ff6-e8b4ffa6579c"",
+                    ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Sprint"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -335,6 +355,7 @@ public partial class @PlayerInputMap: IInputActionCollection2, IDisposable
         m_Player_Craft = m_Player.FindAction("Craft", throwIfNotFound: true);
         m_Player_Rotate = m_Player.FindAction("Rotate", throwIfNotFound: true);
         m_Player_ChangeAnchor = m_Player.FindAction("ChangeAnchor", throwIfNotFound: true);
+        m_Player_Sprint = m_Player.FindAction("Sprint", throwIfNotFound: true);
         // Menu
         m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
         m_Menu_Newaction = m_Menu.FindAction("New action", throwIfNotFound: true);
@@ -409,6 +430,7 @@ public partial class @PlayerInputMap: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Craft;
     private readonly InputAction m_Player_Rotate;
     private readonly InputAction m_Player_ChangeAnchor;
+    private readonly InputAction m_Player_Sprint;
     public struct PlayerActions
     {
         private @PlayerInputMap m_Wrapper;
@@ -423,6 +445,7 @@ public partial class @PlayerInputMap: IInputActionCollection2, IDisposable
         public InputAction @Craft => m_Wrapper.m_Player_Craft;
         public InputAction @Rotate => m_Wrapper.m_Player_Rotate;
         public InputAction @ChangeAnchor => m_Wrapper.m_Player_ChangeAnchor;
+        public InputAction @Sprint => m_Wrapper.m_Player_Sprint;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -462,6 +485,9 @@ public partial class @PlayerInputMap: IInputActionCollection2, IDisposable
             @ChangeAnchor.started += instance.OnChangeAnchor;
             @ChangeAnchor.performed += instance.OnChangeAnchor;
             @ChangeAnchor.canceled += instance.OnChangeAnchor;
+            @Sprint.started += instance.OnSprint;
+            @Sprint.performed += instance.OnSprint;
+            @Sprint.canceled += instance.OnSprint;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -496,6 +522,9 @@ public partial class @PlayerInputMap: IInputActionCollection2, IDisposable
             @ChangeAnchor.started -= instance.OnChangeAnchor;
             @ChangeAnchor.performed -= instance.OnChangeAnchor;
             @ChangeAnchor.canceled -= instance.OnChangeAnchor;
+            @Sprint.started -= instance.OnSprint;
+            @Sprint.performed -= instance.OnSprint;
+            @Sprint.canceled -= instance.OnSprint;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -580,6 +609,7 @@ public partial class @PlayerInputMap: IInputActionCollection2, IDisposable
         void OnCraft(InputAction.CallbackContext context);
         void OnRotate(InputAction.CallbackContext context);
         void OnChangeAnchor(InputAction.CallbackContext context);
+        void OnSprint(InputAction.CallbackContext context);
     }
     public interface IMenuActions
     {

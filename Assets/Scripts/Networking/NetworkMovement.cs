@@ -7,9 +7,6 @@ namespace Networking.Movement
 {
     public class NetworkMovement : NetworkBehaviour
     {
-        [SerializeField] Rigidbody2D rb;
-        [SerializeField] Camera camPosition;
-
         int tick = 0;
         float tickRate = 1f / 60f;
         float tickDeltaTime = 0f;
@@ -22,6 +19,9 @@ namespace Networking.Movement
         public NetworkVariable<TransformState> serverTransformState = new NetworkVariable<TransformState>();
         public TransformState previousTransformState;
 
+        Vector3 targetPosition;
+        Vector3 prevPos;
+
         void OnEnable()
         {
             serverTransformState.OnValueChanged += OnServerStateChanged;
@@ -31,6 +31,15 @@ namespace Networking.Movement
         {
             previousTransformState = previousvalue;
 
+        }
+
+        private void Update()
+        {
+            if (transform.position != prevPos && IsLocalPlayer && IsClient)
+            {
+                MovePlayerServerSideServerRpc(serverTransformState.Value.Position);
+                prevPos = transform.position;
+            }
         }
 
         public void ProcessLocalPlayerMovement(Vector2 movementInput)
@@ -84,30 +93,25 @@ namespace Networking.Movement
 
         public void ProcessSimulatedPlayerMovement()
         {
-            Vector3 serverPosition = serverTransformState.Value.Position;
-            Vector3 currentPosition = transform.position;
-
-            float distance = Vector3.Distance(currentPosition, serverPosition);
-            float interpolationFactor = (tick - serverTransformState.Value.Tick) / tickRate;
-
             tickDeltaTime += Time.deltaTime;
             if (tickDeltaTime > tickRate)
             {
-                if (serverTransformState.Value.HasStartedMoving)
+                // If the server hasn't started moving yet, update the previous state
+                if (!serverTransformState.Value.HasStartedMoving)
                 {
-                    transform.position = serverTransformState.Value.Position;
+                    previousTransformState = serverTransformState.Value;
+                }
+                // If the server has started moving, interpolate between previous and current states
+                else
+                {
+                    float interpolationFactor = tickDeltaTime / tickRate;
+                    Vector3 interpolatedState = Vector3.Lerp(previousTransformState.Position, serverTransformState.Value.Position, interpolationFactor);
+                    transform.position = interpolatedState;
                 }
 
                 tickDeltaTime -= tickRate;
                 tick++;
             }
-
-            if (distance > 1)
-            {
-                transform.position = Vector3.Lerp(currentPosition, serverPosition, interpolationFactor);
-            }
-
-            MovePlayerClientRpc();
         }
 
         [ServerRpc]
@@ -123,20 +127,49 @@ namespace Networking.Movement
             };
 
             previousTransformState = serverTransformState.Value;
-            serverTransformState.Value = state;
+
+            // Call a server method to validate the movement and update the server state
+            ValidateMovementServerRpc(state);
+
+            // Call a client method to update the client state
+            MovePlayerServerSideServerRpc(serverTransformState.Value.Position);
+        }
+
+        [ServerRpc]
+        void ValidateMovementServerRpc(TransformState state)
+        {
+            // Validate the movement and update the server state
+            if (state.Position != serverTransformState.Value.Position)
+            {
+                serverTransformState.Value = state;
+            }
+        }
+
+        [ServerRpc]
+        void MovePlayerServerSideServerRpc(Vector3 serverPosition)
+        {
+            MovePlayerClientRpc(serverPosition);
         }
 
         void MovePlayer(Vector2 movementInput)
         {
-            rb.velocity = movementInput;
+            transform.position += new Vector3(movementInput.x, movementInput.y, 0) * Time.fixedDeltaTime;
         }
 
         [ClientRpc]
-        void MovePlayerClientRpc()
+        void MovePlayerClientRpc(Vector3 serverPosition)
         {
-            if (IsLocalPlayer) return;
+            targetPosition = serverPosition;
 
-            transform.position = serverTransformState.Value.Position;
+            if (IsLocalPlayer)
+            {
+                if (serverTransformState.Value.HasStartedMoving) return;
+
+                if (Vector3.Distance(serverPosition, transform.position) < 1f) return;
+            }
+
+
+            transform.position = Vector3.Lerp(transform.position, targetPosition, 0.2f);
         }
     }
 

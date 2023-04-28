@@ -9,7 +9,7 @@ using UnityEngine.InputSystem;
 public class PlayerControls : NetworkBehaviour
 {
     public PlayerInput playerInput;
-    public Rigidbody2D rb;
+    Rigidbody2D rb;
     public Collider2D hitCollider;
     public NetworkMovement networkMovement;
 
@@ -19,12 +19,21 @@ public class PlayerControls : NetworkBehaviour
     public float runSpeed;
     float moveSpeed;
 
+    public AnimationCurve cameraMovement;
+
     bool isHitting;
 
     public Camera renderCam;
 
-    Vector2 moveInput;
     Vector2 mouseInput;
+    Vector3 cameraLerpPos;
+    Vector3 previousCameraPos;
+
+    Vector2 moveDir;
+    Vector2 mousePos;
+
+    float timeSinceStartCameraMove;
+    public float timeToLerpCamera;
 
     private void Start()
     {
@@ -34,10 +43,6 @@ public class PlayerControls : NetworkBehaviour
         if (IsLocalPlayer)
         {
             renderCam.enabled = true;
-        }
-        else
-        {
-            rb.mass = 100000;
         }
     }
 
@@ -74,25 +79,28 @@ public class PlayerControls : NetworkBehaviour
         playerInput.actions["Sprint"].canceled -= ctx => moveSpeed = walkSpeed;
     }
 
+    private void Update()
+    {
+        if (IsClient && IsLocalPlayer)
+        {
+            CameraMovement(mousePos);
+        }
+    }
+
     private void FixedUpdate()
     {
-        Vector2 moveDir = playerInput.actions["Move"].ReadValue<Vector2>();
-        Vector2 mousePos = playerInput.actions["Mouse"].ReadValue<Vector2>();
+        moveDir = playerInput.actions["Move"].ReadValue<Vector2>();
+        mousePos = playerInput.actions["Mouse"].ReadValue<Vector2>();
 
         moveDir *= moveSpeed;
 
         if (IsServer && IsLocalPlayer)
         {
-            //networkMovement.ProcessSimulatedPlayerMovement();
+            networkMovement.ProcessSimulatedPlayerMovement();
         }
         else if (IsClient && IsLocalPlayer)
         {
-            if (moveInput != moveDir * moveSpeed)
-            {
-                networkMovement.ProcessLocalPlayerMovement(moveDir);
-                moveInput = moveDir * moveSpeed;
-            }
-
+            networkMovement.ProcessLocalPlayerMovement(moveDir);
         }
         
 
@@ -102,6 +110,8 @@ public class PlayerControls : NetworkBehaviour
         }
         else if (IsClient && IsLocalPlayer)
         {
+            CameraMovement(mousePos);
+
             if (mouseInput != mousePos)
             {
                 MouseServerRpc(mousePos);
@@ -112,23 +122,12 @@ public class PlayerControls : NetworkBehaviour
         }
     }
 
-    void Move(Vector2 moveDir)
-    {
-        
-    }
-
     void Mouse(Vector2 mousePos)
     {
         var pos = renderCam.ScreenToViewportPoint(mousePos);
 
         var angle = Mathf.Atan2(pos.y - 0.5f, pos.x - 0.5f) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, angle - 90);
-    }
-
-    [ServerRpc]
-    void MoveServerRpc(Vector2 moveDir)
-    {
-        Move(moveDir);
     }
 
     [ServerRpc]
@@ -143,6 +142,21 @@ public class PlayerControls : NetworkBehaviour
     {
         if (IsLocalPlayer) return;
         Mouse(mousePos);
+    }
+
+    void CameraMovement(Vector2 mousePos)
+    {
+        if (mouseInput != mousePos)
+        {
+            previousCameraPos = renderCam.gameObject.transform.localPosition;
+            cameraLerpPos = renderCam.ScreenToViewportPoint(mousePos);
+            cameraLerpPos = new Vector3(cameraLerpPos.x, cameraLerpPos.y, -10);
+            timeSinceStartCameraMove = 0;
+        }
+        
+        timeSinceStartCameraMove += Time.deltaTime;
+
+        renderCam.gameObject.transform.localPosition = Vector3.Lerp(previousCameraPos, cameraLerpPos, cameraMovement.Evaluate(timeSinceStartCameraMove / timeToLerpCamera));
     }
 
     void Hit()

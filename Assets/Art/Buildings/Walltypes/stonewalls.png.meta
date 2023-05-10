@@ -47,7 +47,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 256
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -67,7 +67,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 4096
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -120,19 +120,19 @@ TextureImporter:
       name: stonewalls_0
       rect:
         serializedVersion: 2
-        x: 72
-        y: 4108
-        width: 401
-        height: 403
+        x: 57
+        y: 3818
+        width: 256
+        height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e50fd3804426c244498fe9ec2b5dfe6d
-      internalID: -886405116
+      spriteID: a8b372a44a98a8b45a5727b206d1e9f6
+      internalID: 847032239
       vertices: []
       indices: 
       edges: []
@@ -141,19 +141,19 @@ TextureImporter:
       name: stonewalls_1
       rect:
         serializedVersion: 2
-        x: 530
-        y: 4105
-        width: 403
-        height: 403
+        x: 399
+        y: 3815
+        width: 256
+        height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e79fde82fe2a876498f30f876b6cb4bc
-      internalID: -1733141126
+      spriteID: 63cebc9f6691bd84c83477dd95b382b0
+      internalID: -277713475
       vertices: []
       indices: 
       edges: []
@@ -167,14 +167,14 @@ TextureImporter:
         width: 256
         height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5460950a02a5e2f4c90c166cca82c81d
-      internalID: -797053743
+      spriteID: 073b1b9aa4b025b4585e2b88a2ed1d38
+      internalID: 835617377
       vertices: []
       indices: 
       edges: []
@@ -183,19 +183,19 @@ TextureImporter:
       name: stonewalls_3
       rect:
         serializedVersion: 2
-        x: 1483
-        y: 4105
-        width: 403
-        height: 403
+        x: 1044
+        y: 3815
+        width: 256
+        height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: eb9760762e6054247abc115b746c53bc
-      internalID: 21711472
+      spriteID: 6cfa4a8b27d2c5d4b821ebf78647613a
+      internalID: -342423053
       vertices: []
       indices: 
       edges: []
@@ -204,19 +204,19 @@ TextureImporter:
       name: stonewalls_4
       rect:
         serializedVersion: 2
-        x: 1968
-        y: 4114
-        width: 403
-        height: 401
+        x: 1349
+        y: 3815
+        width: 256
+        height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d35602d7e0b2832418c3ed394e369b2f
-      internalID: -1844243898
+      spriteID: fec2cd1f7d097b24a9bf6dbefd6740fc
+      internalID: 1787366329
       vertices: []
       indices: 
       edges: []
@@ -225,19 +225,19 @@ TextureImporter:
       name: stonewalls_5
       rect:
         serializedVersion: 2
-        x: 68
-        y: 3667
-        width: 403
-        height: 402
+        x: 61
+        y: 3545
+        width: 256
+        height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5cd5f1933f69eab4eb099a85fd80d390
-      internalID: 900966203
+      spriteID: 534e5ef4969cfdb46b66bacd1c28d62e
+      internalID: 1841818295
       vertices: []
       indices: 
       edges: []
@@ -246,19 +246,19 @@ TextureImporter:
       name: stonewalls_6
       rect:
         serializedVersion: 2
-        x: 533
-        y: 3663
-        width: 403
-        height: 402
+        x: 400
+        y: 3545
+        width: 256
+        height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6be2e312002a37441b63e954f60475e6
-      internalID: 106804804
+      spriteID: 21b9e08d0eef9a543a778d5891225fe0
+      internalID: -965249740
       vertices: []
       indices: 
       edges: []
@@ -267,19 +267,19 @@ TextureImporter:
       name: stonewalls_7
       rect:
         serializedVersion: 2
-        x: 1023
-        y: 3658
-        width: 402
-        height: 403
+        x: 730
+        y: 3544
+        width: 256
+        height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b8caaed9142211e4e8781cfa74042ad1
-      internalID: -515850273
+      spriteID: 3d336bacb76825f4b84c7757c25a483f
+      internalID: -1742324025
       vertices: []
       indices: 
       edges: []
@@ -288,19 +288,19 @@ TextureImporter:
       name: stonewalls_8
       rect:
         serializedVersion: 2
-        x: 1491
-        y: 3663
-        width: 402
-        height: 402
+        x: 1051
+        y: 3544
+        width: 256
+        height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e02f34041c9980841bbced539684fa67
-      internalID: 2117651099
+      spriteID: 04bd593c07f9b834a9cfc99a0b6ddc55
+      internalID: -1212560558
       vertices: []
       indices: 
       edges: []
@@ -309,19 +309,19 @@ TextureImporter:
       name: stonewalls_9
       rect:
         serializedVersion: 2
-        x: 1970
-        y: 3667
-        width: 401
-        height: 402
+        x: 1387
+        y: 3545
+        width: 256
+        height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7325c432a16e67f49a18614e7cf84a5e
-      internalID: 959232099
+      spriteID: 625d06b24b5ca1b4c86f73c228f447be
+      internalID: 2139813380
       vertices: []
       indices: 
       edges: []
@@ -330,19 +330,19 @@ TextureImporter:
       name: stonewalls_10
       rect:
         serializedVersion: 2
-        x: 2451
-        y: 3669
-        width: 403
-        height: 403
+        x: 1723
+        y: 3544
+        width: 256
+        height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 029f41c216875eb49bc67d8df3742c1e
-      internalID: -211073957
+      spriteID: 84bdf6be633a64e498bd8d3f27a56e5e
+      internalID: 518759601
       vertices: []
       indices: 
       edges: []
@@ -351,19 +351,19 @@ TextureImporter:
       name: stonewalls_11
       rect:
         serializedVersion: 2
-        x: 2907
-        y: 3676
-        width: 403
-        height: 401
+        x: 2017
+        y: 3548
+        width: 256
+        height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4e14be1cf433f154a881e4ab0fae8a1f
-      internalID: 1644203617
+      spriteID: 1961361dfa096cf4d8171166520218be
+      internalID: -827745986
       vertices: []
       indices: 
       edges: []
@@ -372,19 +372,19 @@ TextureImporter:
       name: stonewalls_12
       rect:
         serializedVersion: 2
-        x: 3370
-        y: 3671
-        width: 401
-        height: 403
+        x: 2370
+        y: 3549
+        width: 256
+        height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bd50e90ef46f2324ea0a3753df4b1254
-      internalID: -811894565
+      spriteID: 1f8a38d663949bc4ca6c4f40eee1b8d1
+      internalID: -150875735
       vertices: []
       indices: 
       edges: []
@@ -393,19 +393,19 @@ TextureImporter:
       name: stonewalls_13
       rect:
         serializedVersion: 2
-        x: 63
-        y: 3215
-        width: 403
-        height: 403
+        x: 57
+        y: 3274
+        width: 256
+        height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 11d70a9399f4a6b4289684f6d2352e5d
-      internalID: 510079955
+      spriteID: cdb17486684797943a4d7b0908a52d85
+      internalID: -1563319795
       vertices: []
       indices: 
       edges: []
@@ -414,19 +414,19 @@ TextureImporter:
       name: stonewalls_14
       rect:
         serializedVersion: 2
-        x: 542
-        y: 3222
-        width: 403
-        height: 403
+        x: 398
+        y: 3274
+        width: 256
+        height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 52801b20f94c4be4fa6da3978be3927e
-      internalID: 1385759629
+      spriteID: 5eea906fdbb123a4db154983f37cdc5d
+      internalID: -1426921310
       vertices: []
       indices: 
       edges: []
@@ -435,19 +435,19 @@ TextureImporter:
       name: stonewalls_15
       rect:
         serializedVersion: 2
-        x: 1009
-        y: 3210
-        width: 403
-        height: 403
+        x: 730
+        y: 3274
+        width: 256
+        height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 83320b32fed4e364390d6547a479804b
-      internalID: -2004358990
+      spriteID: d3b5e68ee0e301d4db90ec7fb1f0f74f
+      internalID: 1504964485
       vertices: []
       indices: 
       edges: []
@@ -456,19 +456,19 @@ TextureImporter:
       name: stonewalls_16
       rect:
         serializedVersion: 2
-        x: 1487
-        y: 3210
-        width: 403
-        height: 403
+        x: 1051
+        y: 3274
+        width: 256
+        height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 42aefc5d972ccc041b8fa73f4161f5b5
-      internalID: 1639522700
+      spriteID: 978371370fbeda644853d6d061ea456b
+      internalID: -1259669561
       vertices: []
       indices: 
       edges: []
@@ -477,19 +477,19 @@ TextureImporter:
       name: stonewalls_17
       rect:
         serializedVersion: 2
-        x: 74
-        y: 2763
-        width: 403
-        height: 401
+        x: 58
+        y: 3013
+        width: 256
+        height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 19b9e799a5728ac44869dabf3c9c6118
-      internalID: 1569531152
+      spriteID: 5fb9bf7abecbb2841852618f7e000b54
+      internalID: 1678941904
       vertices: []
       indices: 
       edges: []
@@ -498,19 +498,19 @@ TextureImporter:
       name: stonewalls_18
       rect:
         serializedVersion: 2
-        x: 537
-        y: 2765
-        width: 401
-        height: 403
+        x: 399
+        y: 3010
+        width: 256
+        height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c458d32346e11f44f8987cf4b0375917
-      internalID: 97319520
+      spriteID: f17dbfb74fdd0a64785280365fe66265
+      internalID: -1261162887
       vertices: []
       indices: 
       edges: []
@@ -519,19 +519,19 @@ TextureImporter:
       name: stonewalls_19
       rect:
         serializedVersion: 2
-        x: 74
-        y: 2316
-        width: 403
-        height: 403
+        x: 729
+        y: 3008
+        width: 256
+        height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0e58ed0fa68ba1644bdb5d6817155359
-      internalID: 1858095311
+      spriteID: c79fa79c15a781746984606fbf858d61
+      internalID: 192671704
       vertices: []
       indices: 
       edges: []
@@ -540,19 +540,19 @@ TextureImporter:
       name: stonewalls_20
       rect:
         serializedVersion: 2
-        x: 553
-        y: 2318
-        width: 401
-        height: 402
+        x: 1058
+        y: 3008
+        width: 256
+        height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1ec2c293fe182a944b64c0cb702a7868
-      internalID: 1070457297
+      spriteID: 76735bb2afec70f4a9d7d1818a144ac0
+      internalID: -808991165
       vertices: []
       indices: 
       edges: []
@@ -561,19 +561,19 @@ TextureImporter:
       name: stonewalls_21
       rect:
         serializedVersion: 2
-        x: 1029
-        y: 2336
-        width: 403
-        height: 403
+        x: 1391
+        y: 3008
+        width: 256
+        height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b57b9a0e9c2fcce4ea0e0d1beda742df
-      internalID: -2001359762
+      spriteID: 354f13d663cb6fd48aaf9833d90683e8
+      internalID: 990646652
       vertices: []
       indices: 
       edges: []
@@ -582,19 +582,19 @@ TextureImporter:
       name: stonewalls_22
       rect:
         serializedVersion: 2
-        x: 1498
-        y: 2336
-        width: 401
-        height: 400
+        x: 1723
+        y: 3008
+        width: 256
+        height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a8804d0756ccf7c4fbbec9103b5fed18
-      internalID: 1342100871
+      spriteID: 79f6965e8861a0e4f97d07b67b67f3db
+      internalID: -2093854001
       vertices: []
       indices: 
       edges: []
@@ -603,19 +603,19 @@ TextureImporter:
       name: stonewalls_23
       rect:
         serializedVersion: 2
-        x: 63
-        y: 1868
-        width: 403
-        height: 401
+        x: 46
+        y: 2740
+        width: 256
+        height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a4f7ee592f6b3ee45960543a383b804e
-      internalID: -747893342
+      spriteID: 5c5717fdb007657409c73edf6da86a98
+      internalID: -1378016068
       vertices: []
       indices: 
       edges: []
@@ -624,19 +624,19 @@ TextureImporter:
       name: stonewalls_24
       rect:
         serializedVersion: 2
-        x: 548
-        y: 1873
-        width: 401
-        height: 403
+        x: 402
+        y: 2740
+        width: 256
+        height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3fb94c758d6aa5645ad11625ee92648e
-      internalID: 182431808
+      spriteID: 7381ed7ac17d74949994effdae88cb9b
+      internalID: 813745440
       vertices: []
       indices: 
       edges: []
@@ -645,19 +645,19 @@ TextureImporter:
       name: stonewalls_25
       rect:
         serializedVersion: 2
-        x: 1020
-        y: 1879
-        width: 403
-        height: 401
+        x: 730
+        y: 2735
+        width: 256
+        height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 605b045dc39760045af2039372323dcd
-      internalID: 2131470084
+      spriteID: d8aa196b73eff1840b77d2127c3b408e
+      internalID: -1659239943
       vertices: []
       indices: 
       edges: []
@@ -666,19 +666,19 @@ TextureImporter:
       name: stonewalls_26
       rect:
         serializedVersion: 2
-        x: 1496
-        y: 1873
-        width: 403
-        height: 403
+        x: 1064
+        y: 2732
+        width: 256
+        height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 211972fb0b73a7245bbfb222cd1430e4
-      internalID: 431352999
+      spriteID: 2ec921593d9185a42aaaa34871958735
+      internalID: -87777316
       vertices: []
       indices: 
       edges: []
@@ -687,19 +687,19 @@ TextureImporter:
       name: stonewalls_27
       rect:
         serializedVersion: 2
-        x: 1966
-        y: 1882
-        width: 403
-        height: 403
+        x: 1408
+        y: 2730
+        width: 256
+        height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d8e0a912fa8e3b74296f74ce46b19f57
-      internalID: 850254664
+      spriteID: 62200f99686f7df4486cd4b6a922ede3
+      internalID: -2099898426
       vertices: []
       indices: 
       edges: []
@@ -708,19 +708,19 @@ TextureImporter:
       name: stonewalls_28
       rect:
         serializedVersion: 2
-        x: 65
-        y: 1416
-        width: 403
-        height: 403
+        x: 49
+        y: 2450
+        width: 256
+        height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4f47bf66bd87276498f296cb5893f639
-      internalID: -510673673
+      spriteID: 63bd2fc49fb0b6d4c92f8370e168d250
+      internalID: 994228293
       vertices: []
       indices: 
       edges: []
@@ -729,19 +729,19 @@ TextureImporter:
       name: stonewalls_29
       rect:
         serializedVersion: 2
-        x: 564
-        y: 1423
-        width: 403
-        height: 402
+        x: 400
+        y: 2450
+        width: 256
+        height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b1e75b1f18d9f4148b85a221bbeb0dea
-      internalID: 946123997
+      spriteID: ca5e3f76afd617749b1464fbed65c870
+      internalID: 1004929685
       vertices: []
       indices: 
       edges: []
@@ -750,19 +750,19 @@ TextureImporter:
       name: stonewalls_30
       rect:
         serializedVersion: 2
-        x: 1027
-        y: 1419
-        width: 402
-        height: 403
+        x: 732
+        y: 2450
+        width: 256
+        height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0d195c7de8a5fa94589edeb0805a0002
-      internalID: 1901442991
+      spriteID: 9e40846cc3d3e84468aacac5de651935
+      internalID: 92773978
       vertices: []
       indices: 
       edges: []
@@ -771,19 +771,19 @@ TextureImporter:
       name: stonewalls_31
       rect:
         serializedVersion: 2
-        x: 1498
-        y: 1425
-        width: 403
-        height: 403
+        x: 1065
+        y: 2447
+        width: 256
+        height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 83559af8066345f45b0f73d7051e6471
-      internalID: -1683451687
+      spriteID: c4acdf878451e82469904ef870d21998
+      internalID: -324070163
       vertices: []
       indices: 
       edges: []
@@ -797,14 +797,14 @@ TextureImporter:
         width: 256
         height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 08eac5ecdd679454596fab1bd005c382
-      internalID: -1202065743
+      spriteID: bbbe6af5875ca764fab839ea0f8f5406
+      internalID: -1371605100
       vertices: []
       indices: 
       edges: []
@@ -813,19 +813,19 @@ TextureImporter:
       name: stonewalls_33
       rect:
         serializedVersion: 2
-        x: 2420
-        y: 1410
-        width: 403
-        height: 403
+        x: 1731
+        y: 2443
+        width: 256
+        height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 78330dda91cc5f34db370d29a5936a21
-      internalID: 131244641
+      spriteID: 9697d21b8e6f2d54680a63507976f606
+      internalID: 736266372
       vertices: []
       indices: 
       edges: []
@@ -834,19 +834,19 @@ TextureImporter:
       name: stonewalls_34
       rect:
         serializedVersion: 2
-        x: 2889
-        y: 1408
-        width: 403
-        height: 403
+        x: 2039
+        y: 2443
+        width: 256
+        height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1e5b10c46da15c942a97c263bcfc7f5c
-      internalID: -89684366
+      spriteID: 2bf4268c7a31ef34f861e7f76db8925b
+      internalID: 53385944
       vertices: []
       indices: 
       edges: []
@@ -855,12 +855,12 @@ TextureImporter:
       name: stonewalls_35
       rect:
         serializedVersion: 2
-        x: 3352
-        y: 1408
-        width: 403
-        height: 403
+        x: 2370
+        y: 2443
+        width: 256
+        height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -876,19 +876,19 @@ TextureImporter:
       name: stonewalls_37
       rect:
         serializedVersion: 2
-        x: 568
-        y: 951
-        width: 401
-        height: 403
+        x: 52
+        y: 2128
+        width: 256
+        height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f68aa5e8473f5634888b821fa7a06228
-      internalID: -369175299
+      spriteID: 0303e6ee245b1b043ae3604c11bd61a6
+      internalID: 269405828
       vertices: []
       indices: 
       edges: []
@@ -897,19 +897,19 @@ TextureImporter:
       name: stonewalls_38
       rect:
         serializedVersion: 2
-        x: 1038
-        y: 960
-        width: 403
-        height: 403
+        x: 402
+        y: 2128
+        width: 256
+        height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 862b5afea7085c84c902456355b25781
-      internalID: 829842763
+      spriteID: ad4056332310cf54c96c0d1eda0889ff
+      internalID: 1852612513
       vertices: []
       indices: 
       edges: []
@@ -918,19 +918,19 @@ TextureImporter:
       name: stonewalls_39
       rect:
         serializedVersion: 2
-        x: 1507
-        y: 960
-        width: 403
-        height: 403
+        x: 731
+        y: 2128
+        width: 256
+        height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 942bbdb82f8c29f4aaba769a6709f034
-      internalID: 2120661899
+      spriteID: 23f71c490e6e1e346bf332c87aa992f7
+      internalID: -791639197
       vertices: []
       indices: 
       edges: []
@@ -939,19 +939,19 @@ TextureImporter:
       name: stonewalls_40
       rect:
         serializedVersion: 2
-        x: 77
-        y: 502
-        width: 403
-        height: 403
+        x: 1066
+        y: 2127
+        width: 256
+        height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 13594e51203f9d247a1230241604ecc9
-      internalID: 1840843685
+      spriteID: 740e347ebdc593448bf5ca98187a3152
+      internalID: -1847545447
       vertices: []
       indices: 
       edges: []
@@ -960,19 +960,19 @@ TextureImporter:
       name: stonewalls_41
       rect:
         serializedVersion: 2
-        x: 561
-        y: 502
-        width: 403
-        height: 403
+        x: 52
+        y: 1814
+        width: 256
+        height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 836519ba180e09c47ace0caf11892823
-      internalID: -1521275605
+      spriteID: 92043d09ccc8ff2489b9bfc41f853e95
+      internalID: 2090007944
       vertices: []
       indices: 
       edges: []
@@ -981,19 +981,19 @@ TextureImporter:
       name: stonewalls_42
       rect:
         serializedVersion: 2
-        x: 1034
-        y: 504
-        width: 402
-        height: 403
+        x: 403
+        y: 1814
+        width: 256
+        height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ad174a46321951846ae7ea04e1032eb7
-      internalID: -1533886463
+      spriteID: c625cf01be70928469352d8a2b02bcb1
+      internalID: 29271211
       vertices: []
       indices: 
       edges: []
@@ -1002,19 +1002,19 @@ TextureImporter:
       name: stonewalls_43
       rect:
         serializedVersion: 2
-        x: 1505
-        y: 502
-        width: 403
-        height: 403
+        x: 733
+        y: 1815
+        width: 256
+        height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 94c96bcfc8587d645a3254e85eb519ff
-      internalID: -296104027
+      spriteID: 6949654d719949645a67d8ee1c5e5911
+      internalID: 1857436753
       vertices: []
       indices: 
       edges: []
@@ -1023,19 +1023,19 @@ TextureImporter:
       name: stonewalls_44
       rect:
         serializedVersion: 2
-        x: 83
-        y: 43
-        width: 403
-        height: 403
+        x: 1069
+        y: 1814
+        width: 256
+        height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 05bb314340f1e9a45b35a1bcedabd63f
-      internalID: 1937524899
+      spriteID: 0e43dd673f6f4f0418db20e4fa690c55
+      internalID: -1747205807
       vertices: []
       indices: 
       edges: []
@@ -1044,19 +1044,19 @@ TextureImporter:
       name: stonewalls_45
       rect:
         serializedVersion: 2
-        x: 568
-        y: 43
-        width: 401
-        height: 403
+        x: 51
+        y: 1487
+        width: 256
+        height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cdccc312c274da64dabd071d3ae5aed7
-      internalID: 1837609962
+      spriteID: 9cf45bfa81d89764d9451023419add3e
+      internalID: 1294878416
       vertices: []
       indices: 
       edges: []

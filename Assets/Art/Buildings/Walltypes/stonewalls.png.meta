@@ -163,7 +163,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 728
-        y: 3827
+        y: 3815
         width: 256
         height: 256
       alignment: 0
@@ -793,7 +793,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1408
-        y: 2443
+        y: 2447
         width: 256
         height: 256
       alignment: 0
@@ -866,8 +866,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 095b94cc279c16a4086684171a119782
-      internalID: 2106441043
+      spriteID: 65f68ad301bb46747bea431820c6d880
+      internalID: -1347985969
       vertices: []
       indices: 
       edges: []
@@ -1082,6 +1082,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: stonewalls_46
+      rect:
+        serializedVersion: 2
+        x: 405
+        y: 1487
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 41aa2147da0acdc4391b5fa172078601
+      internalID: -799614487
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -1093,53 +1114,53 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      stonewalls_0: 847032239
-      stonewalls_1: -277713475
-      stonewalls_10: 518759601
-      stonewalls_11: -827745986
-      stonewalls_12: -150875735
-      stonewalls_13: -1563319795
-      stonewalls_14: -1426921310
-      stonewalls_15: 1504964485
-      stonewalls_16: -1259669561
-      stonewalls_17: 1678941904
-      stonewalls_18: -1261162887
-      stonewalls_19: 192671704
-      stonewalls_2: 835617377
-      stonewalls_20: -808991165
-      stonewalls_21: 990646652
-      stonewalls_22: -2093854001
-      stonewalls_23: -1378016068
-      stonewalls_24: 813745440
-      stonewalls_25: -1659239943
-      stonewalls_26: -87777316
-      stonewalls_27: -2099898426
-      stonewalls_28: 994228293
-      stonewalls_29: 1004929685
-      stonewalls_3: -342423053
-      stonewalls_30: 92773978
-      stonewalls_31: -324070163
-      stonewalls_32: -1371605100
-      stonewalls_33: 736266372
-      stonewalls_34: 53385944
-      stonewalls_35: 2106441043
-      stonewalls_36: -1894055520
-      stonewalls_37: 269405828
-      stonewalls_38: 1852612513
-      stonewalls_39: -791639197
-      stonewalls_4: 1787366329
-      stonewalls_40: -1847545447
-      stonewalls_41: 2090007944
-      stonewalls_42: 29271211
-      stonewalls_43: 1857436753
-      stonewalls_44: -1747205807
-      stonewalls_45: 1294878416
-      stonewalls_46: 1840181381
-      stonewalls_5: 1841818295
-      stonewalls_6: -965249740
-      stonewalls_7: -1742324025
-      stonewalls_8: -1212560558
-      stonewalls_9: 2139813380
+      stonewalls_0: -886405116
+      stonewalls_1: -1733141126
+      stonewalls_10: -211073957
+      stonewalls_11: 1644203617
+      stonewalls_12: -811894565
+      stonewalls_13: 510079955
+      stonewalls_14: 1385759629
+      stonewalls_15: -2004358990
+      stonewalls_16: 1639522700
+      stonewalls_17: 1569531152
+      stonewalls_18: 97319520
+      stonewalls_19: 1858095311
+      stonewalls_2: -797053743
+      stonewalls_20: 1070457297
+      stonewalls_21: -2001359762
+      stonewalls_22: 1342100871
+      stonewalls_23: -747893342
+      stonewalls_24: 182431808
+      stonewalls_25: 2131470084
+      stonewalls_26: 431352999
+      stonewalls_27: 850254664
+      stonewalls_28: -510673673
+      stonewalls_29: 946123997
+      stonewalls_3: 21711472
+      stonewalls_30: 1901442991
+      stonewalls_31: -1683451687
+      stonewalls_32: -1202065743
+      stonewalls_33: 131244641
+      stonewalls_34: -89684366
+      stonewalls_35: -1347985969
+      stonewalls_36: -1345190160
+      stonewalls_37: -369175299
+      stonewalls_38: 829842763
+      stonewalls_39: 2120661899
+      stonewalls_4: -1844243898
+      stonewalls_40: 1840843685
+      stonewalls_41: -1521275605
+      stonewalls_42: -1533886463
+      stonewalls_43: -296104027
+      stonewalls_44: 1937524899
+      stonewalls_45: 1837609962
+      stonewalls_46: -799614487
+      stonewalls_5: 900966203
+      stonewalls_6: 106804804
+      stonewalls_7: -515850273
+      stonewalls_8: 2117651099
+      stonewalls_9: 959232099
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

@@ -162,10 +162,10 @@ TextureImporter:
       name: stonewalls_2
       rect:
         serializedVersion: 2
-        x: 1024
-        y: 4105
-        width: 401
-        height: 403
+        x: 728
+        y: 3815
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -792,10 +792,10 @@ TextureImporter:
       name: stonewalls_32
       rect:
         serializedVersion: 2
-        x: 1959
-        y: 1408
-        width: 401
-        height: 403
+        x: 1408
+        y: 2447
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -868,27 +868,6 @@ TextureImporter:
       bones: []
       spriteID: 65f68ad301bb46747bea431820c6d880
       internalID: -1347985969
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: stonewalls_36
-      rect:
-        serializedVersion: 2
-        x: 85
-        y: 971
-        width: 403
-        height: 403
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7006d5e0058945645bc6d18b2044f719
-      internalID: -1345190160
       vertices: []
       indices: 
       edges: []
@@ -1082,6 +1061,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: stonewalls_46
+      rect:
+        serializedVersion: 2
+        x: 405
+        y: 1487
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 41aa2147da0acdc4391b5fa172078601
+      internalID: -799614487
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -1134,6 +1134,7 @@ TextureImporter:
       stonewalls_43: -296104027
       stonewalls_44: 1937524899
       stonewalls_45: 1837609962
+      stonewalls_46: -799614487
       stonewalls_5: 900966203
       stonewalls_6: 106804804
       stonewalls_7: -515850273

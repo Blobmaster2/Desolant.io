@@ -9,40 +9,50 @@ using UnityEngine.InputSystem;
 public class PlayerControls : NetworkBehaviour
 {
     public PlayerInput playerInput;
-    Rigidbody2D rb;
     public Collider2D hitCollider;
-    public NetworkMovement networkMovement;
+
+    Rigidbody2D rigidBody;
+
+    [SerializeField] private Transform playerTransform;
 
     public float hitCooldown;
 
-    public float walkSpeed;
-    public float runSpeed;
-    float moveSpeed;
+    private const float walkSpeed = 4;
+    private const float runSpeed = 7;
+    private float movementPenalty = 1;
+    NetworkVariable<float> moveSpeed = new();
+    NetworkVariable<Vector2> serverInput = new();
+    NetworkVariable<float> serverLookAngle = new();
 
     public AnimationCurve cameraMovement;
 
-    bool isHitting;
-
     public Camera renderCam;
 
-    Vector2 mouseInput;
-    Vector3 cameraLerpPos;
-    Vector3 previousCameraPos;
+    private bool isHitting;
 
-    Vector2 moveDir;
-    Vector2 mousePos;
+    private bool isSprinting;
+
+    private Vector2 moveDir;
+    private Vector2 mouseInput;
+    private Vector3 cameraLerpPos;
+    private Vector3 previousCameraPos;
 
     float timeSinceStartCameraMove;
     public float timeToLerpCamera;
 
     private void Start()
     {
-        moveSpeed = walkSpeed;
+        rigidBody = GetComponent<Rigidbody2D>();
+
+        if (IsServer)
+            moveSpeed.Value = walkSpeed;
+
         InitPlayerActions();
 
         if (IsLocalPlayer)
         {
             renderCam.enabled = true;
+            SetSpeedServerRPC(walkSpeed);
         }
     }
 
@@ -56,8 +66,8 @@ public class PlayerControls : NetworkBehaviour
         playerInput.actions["Interact"].performed += ctx => Interact();
         playerInput.actions["Reload"].performed += ctx => Reload();
         playerInput.actions["ChangeAnchor"].performed += ChangeAnchor;
-        playerInput.actions["Sprint"].started += ctx => moveSpeed = runSpeed;
-        playerInput.actions["Sprint"].canceled += ctx => moveSpeed = walkSpeed;
+        playerInput.actions["Sprint"].started += ctx => SetSpeed(runSpeed, true);
+        playerInput.actions["Sprint"].canceled += ctx => SetSpeed(walkSpeed, false);
     }
 
     private void OnDisable()
@@ -75,73 +85,109 @@ public class PlayerControls : NetworkBehaviour
         playerInput.actions["Interact"].started -= ctx => Interact();
         playerInput.actions["Reload"].started -= ctx => Reload();
         playerInput.actions["ChangeAnchor"].started -= ChangeAnchor;
-        playerInput.actions["Sprint"].started -= ctx => moveSpeed = runSpeed;
-        playerInput.actions["Sprint"].canceled -= ctx => moveSpeed = walkSpeed;
-    }
-
-    private void Update()
-    {
-        if (IsClient && IsLocalPlayer)
-        {
-            CameraMovement(mousePos);
-        }
+        playerInput.actions["Sprint"].started -= ctx => SetSpeed(runSpeed, true);
+        playerInput.actions["Sprint"].canceled -= ctx => SetSpeed(walkSpeed, false);
     }
 
     private void FixedUpdate()
     {
-        moveDir = playerInput.actions["Move"].ReadValue<Vector2>();
-        mousePos = playerInput.actions["Mouse"].ReadValue<Vector2>();
-
-        moveDir *= moveSpeed;
-
-        if (IsServer && IsLocalPlayer)
+        if (IsServer)
         {
-            networkMovement.ProcessSimulatedPlayerMovement();
+            MovePlayer(serverInput.Value);
+            Look(serverLookAngle.Value);
+            return;
         }
-        else if (IsClient && IsLocalPlayer)
-        {
-            networkMovement.ProcessLocalPlayerMovement(moveDir);
-        }
-        
 
-        if (IsServer && IsLocalPlayer)
+        if (IsClient && IsLocalPlayer)
         {
-            Mouse(mousePos);
-        }
-        else if (IsClient && IsLocalPlayer)
-        {
+            moveDir = playerInput.actions["Move"].ReadValue<Vector2>();
+            var mousePos = playerInput.actions["Mouse"].ReadValue<Vector2>();
+
+            float lookAngle = GetAngle(mousePos);
+
             CameraMovement(mousePos);
 
-            if (mouseInput != mousePos)
+            if (lookAngle != serverLookAngle.Value)
             {
-                MouseServerRpc(mousePos);
-                Mouse(mousePos);
-
-                mouseInput = mousePos;
+                UpdateServerLookDirServerRPC(lookAngle);
             }
+
+            if (moveDir != serverInput.Value)
+            {
+                UpdateServerMoveDirServerRPC(moveDir);
+            }
+
+            Look(lookAngle);
+        }
+
+        else
+        {
+            Look(serverLookAngle.Value);
         }
     }
 
-    void Mouse(Vector2 mousePos)
+    [ServerRpc]
+    private void UpdateServerLookDirServerRPC(float input)
+    {
+        serverLookAngle.Value = input;
+    }
+
+    private void Look(float input)
+    {
+        playerTransform.rotation = Quaternion.Euler(0, 0, input);
+    }
+
+    [ServerRpc]
+    private void UpdateServerMoveDirServerRPC(Vector2 moveDir)
+    {
+        serverInput.Value = moveDir;
+    }
+
+    private void MovePlayer(Vector2 input)
+    {
+        rigidBody.MovePosition(movementPenalty * moveSpeed.Value * Time.fixedDeltaTime * new Vector3(input.x, input.y) + transform.position);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (!IsServer)
+            return;
+
+        if (collision.gameObject.CompareTag("Player"))
+            movementPenalty = 0.35f;
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (!IsServer)
+            return;
+
+        if (collision.gameObject.CompareTag("Player"))
+            movementPenalty = 1;
+    }
+
+    private void SetSpeed(float speed, bool sprinting)
+    {
+        isSprinting = sprinting;
+
+        if (!IsLocalPlayer)
+            return;
+
+        SetSpeedServerRPC(speed);
+    }
+
+    [ServerRpc]
+    private void SetSpeedServerRPC(float speed)
+    {
+        moveSpeed.Value = speed;
+    }
+
+    float GetAngle(Vector2 mousePos)
     {
         var pos = renderCam.ScreenToViewportPoint(mousePos);
 
         var angle = Mathf.Atan2(pos.y - 0.5f, pos.x - 0.5f) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0, 0, angle - 90);
-    }
-
-    [ServerRpc]
-    void MouseServerRpc(Vector2 mousePos)
-    {
-        Mouse(mousePos);
-        MouseClientRpc(mousePos);
-    }
-
-    [ClientRpc]
-    void MouseClientRpc(Vector2 mousePos)
-    {
-        if (IsLocalPlayer) return;
-        Mouse(mousePos);
+        return angle - 90;
     }
 
     void CameraMovement(Vector2 mousePos)
@@ -153,7 +199,7 @@ public class PlayerControls : NetworkBehaviour
             cameraLerpPos = new Vector3(cameraLerpPos.x, cameraLerpPos.y, -10);
             timeSinceStartCameraMove = 0;
         }
-        
+
         timeSinceStartCameraMove += Time.deltaTime;
 
         renderCam.gameObject.transform.localPosition = Vector3.Lerp(previousCameraPos, cameraLerpPos, cameraMovement.Evaluate(timeSinceStartCameraMove / timeToLerpCamera));
@@ -232,6 +278,6 @@ public class PlayerControls : NetworkBehaviour
 
     private void ChangeAnchor(InputAction.CallbackContext ctx)
     {
-        
+
     }
 }

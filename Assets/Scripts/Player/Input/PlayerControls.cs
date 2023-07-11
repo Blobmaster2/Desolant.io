@@ -40,6 +40,11 @@ public class PlayerControls : NetworkBehaviour
     float timeSinceStartCameraMove;
     public float timeToLerpCamera;
 
+    public override void OnNetworkDespawn()
+    {
+
+    }
+
     private void Start()
     {
         rigidBody = GetComponent<Rigidbody2D>();
@@ -126,6 +131,8 @@ public class PlayerControls : NetworkBehaviour
         }
     }
 
+    //Movement
+
     [ServerRpc]
     private void UpdateServerLookDirServerRPC(float input)
     {
@@ -187,8 +194,10 @@ public class PlayerControls : NetworkBehaviour
         var pos = renderCam.ScreenToViewportPoint(mousePos);
 
         var angle = Mathf.Atan2(pos.y - 0.5f, pos.x - 0.5f) * Mathf.Rad2Deg;
-        return angle - 90;
+        return angle + 90;
     }
+
+    //Vision
 
     void CameraMovement(Vector2 mousePos)
     {
@@ -204,6 +213,8 @@ public class PlayerControls : NetworkBehaviour
 
         renderCam.gameObject.transform.localPosition = Vector3.Lerp(previousCameraPos, cameraLerpPos, cameraMovement.Evaluate(timeSinceStartCameraMove / timeToLerpCamera));
     }
+
+    //Core Mechanics
 
     void Hit()
     {
